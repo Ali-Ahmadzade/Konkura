@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Konkura</string>
+    <string name="splash_text">کنکورا : بانک جامع سوالات کنکور</string>
+    <string name="iconSplash">iconSplash</string>
 </resources>

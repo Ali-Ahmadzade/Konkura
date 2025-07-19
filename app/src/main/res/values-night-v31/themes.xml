@@ -1,9 +1,10 @@
-<resources >
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
     <style name="Theme.Konkura" parent="Theme.Material3.DayNight.NoActionBar">
 
 
-    </style>
 
+    </style>
 
 </resources>
