@@ -10,11 +10,12 @@ import ir.devalix.konkura.fragments.RiaziFragment
 import ir.devalix.konkura.fragments.TajrobiFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 class MainActivity : AppCompatActivity() {
 
-    private var currentFragment = 2
-    lateinit var binding: ActivityMainBinding
+    private var currentFragment = 1
+    private lateinit var binding: ActivityMainBinding
     private var keepSplashScreen = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,44 +29,57 @@ class MainActivity : AppCompatActivity() {
             keepSplashScreen = false
         }
 
-        binding.bottNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.botNavEnsani -> {
-                    if (currentFragment == 1) {
-                    } else {
-                        val fragmentTransaction = supportFragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.frameFragmentMain, EnsaniFragment())
-                        fragmentTransaction.commit()
-                        currentFragment = 1
+        binding.curveBotNav.setOnMenuItemClickListener { cbnMenuItem, i ->
+            when (i) {
+                0 -> {
+                    if (currentFragment != i) {
+                        val fragmentManager = supportFragmentManager.beginTransaction()
+                        fragmentManager.replace(R.id.frameFragmentMain, EnsaniFragment())
+                        fragmentManager.commit()
+                        currentFragment = i
                     }
                 }
 
-                R.id.botNavRiazi -> {
-                    if (currentFragment == 3) {
-                    } else {
-                        val fragmentTransaction = supportFragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.frameFragmentMain, RiaziFragment())
-                        fragmentTransaction.commit()
-                        currentFragment = 3
+                1 -> {
+                    if (currentFragment != i) {
+                        val fragmentManager = supportFragmentManager.beginTransaction()
+                        fragmentManager.replace(R.id.frameFragmentMain, TajrobiFragment())
+                        fragmentManager.commit()
+                        currentFragment = i
                     }
                 }
 
-                R.id.botNavTajrobi -> {
-                    if (currentFragment == 2) {
-                    } else {
-                        val fragmentTransaction = supportFragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.frameFragmentMain, TajrobiFragment())
-                        fragmentTransaction.commit()
-                        currentFragment = 2
+                2 -> {
+                    if (currentFragment != i) {
+                        val fragmentManager = supportFragmentManager.beginTransaction()
+                        fragmentManager.replace(R.id.frameFragmentMain, RiaziFragment())
+                        fragmentManager.commit()
+                        currentFragment = i
                     }
                 }
             }
-            true
         }
+
     }
 
     private fun setupSplashScreen() {
-        binding.bottNav.selectedItemId = R.id.botNavTajrobi
+
+        val menuItem = arrayOf(
+            CbnMenuItem(
+                R.drawable.ic_lawyer, R.drawable.lawyer_animated, 0, "انسانی"
+            ),
+            CbnMenuItem(
+                R.drawable.ic_doctor, R.drawable.doctor_animated, 0, "تجربی"
+            ),
+            CbnMenuItem(
+                R.drawable.ic_engineer, R.drawable.engineer_animated, 0, "ریاضی"
+            ),
+        )
+        binding.curveBotNav.setMenuItems(menuItem, currentFragment)
+
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.add(R.id.frameFragmentMain, TajrobiFragment())
+        fragmentManager.commit()
 
         val setupFragment = supportFragmentManager.beginTransaction()
         setupFragment.add(R.id.frameFragmentMain, TajrobiFragment())

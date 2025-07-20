@@ -21,29 +21,16 @@
     </FrameLayout>
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewBottom"
-        app:layout_goneMarginBottom="12dp"
+    <np.com.susanthapa.curved_bottom_navigation.CurvedBottomNavigationView
+        android:id="@+id/curveBotNav"
+        android:paddingBottom="6dp"
+        app:cbn_textSize ="14dp"
+        app:cbn_textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="12dp"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:theme="@style/Theme.MyApp.BottomNav"
-            android:id="@+id/bottNav"
-            android:background="@color/primary"
-            android:layout_gravity="bottom"
-            app:menu="@menu/bot_nav_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
