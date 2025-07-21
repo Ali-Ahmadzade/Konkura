@@ -53,4 +53,6 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     //bot nav
     implementation("np.com.susanthapa:curved_bottom_navigation:0.7.0")
+    // expandable CardView
+    implementation("com.github.cachapa:ExpandableLayout:2.9.2")
 }

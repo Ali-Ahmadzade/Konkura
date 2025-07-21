@@ -12,4 +12,7 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/empty_splash_screen</item>
 
     </style>
+
+
+
 </resources>

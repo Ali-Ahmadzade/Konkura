@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Konkura</string>
+    <string name="app_name_fa">کنکورا</string>
     <string name="splash_text">کنکورا : بانک جامع سوالات کنکور</string>
     <string name="iconSplash">iconSplash</string>
     <string name="ensani">انسانی</string>
     <string name="tajrobi">تجربی</string>
     <string name="riazi">ریاضی</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

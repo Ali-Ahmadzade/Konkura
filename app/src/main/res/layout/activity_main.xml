@@ -9,20 +9,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/toolBarLayout"
+        layout="@layout/toolbar_layout"/>
+
     <FrameLayout
         android:id="@+id/frameFragmentMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/curveBotNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolBarLayout">
 
 
     </FrameLayout>
 
 
     <np.com.susanthapa.curved_bottom_navigation.CurvedBottomNavigationView
+
         app:cbn_animDuration="400"
         app:cbn_elevation="8dp"
         app:cbn_bg="@color/accentColor"
@@ -32,7 +37,8 @@
         app:cbn_textColor="@color/white"
         app:cbn_selectedColor="@color/black"
         app:cbn_unSelectedColor="@color/white"
-        app:cbn_showDot="false"
+        app:cbn_showDot="true"
+        app:cbn_dotColor="@color/accentColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
