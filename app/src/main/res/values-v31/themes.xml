@@ -3,6 +3,10 @@
 
     <style name="Theme.Konkura" parent="Theme.Material3.DayNight.NoActionBar">
 
+        <item name="fontFamily">@font/peyda</item>
+
+        <item name="android:statusBarColor">@color/bgColorWhite</item>
+        <item name="android:windowLightStatusBar">true</item>
 
         <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/empty_splash_screen</item>

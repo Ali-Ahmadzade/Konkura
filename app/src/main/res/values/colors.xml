@@ -2,14 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#FF0000</color>
 
     <color name="primary">#007E90</color>
     <color name="test">#C3FFF8</color>
     <color name="test2">#6ECFC5</color>
     <color name="test3">#26A69A</color>
     <color name="test4">#FFFEFF</color>
-
     <color name="grey">#979797</color>
+
+    <color name="bgColorWhite">#F8FAFC</color>
+    <color name="primaryColor">#3B82F6</color>
+    <color name="accentColor">#2563EB</color>
+    <color name="cardColor">#FFFFFF</color>
+    <color name="mainText">#1E293B</color>
+    <color name="otherText">#64748B</color>
+    <color name="borderColor">#C3C8D1</color>
 
 </resources>

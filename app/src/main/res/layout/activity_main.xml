@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/bgColorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,10 +23,16 @@
 
 
     <np.com.susanthapa.curved_bottom_navigation.CurvedBottomNavigationView
+        app:cbn_animDuration="400"
+        app:cbn_elevation="8dp"
+        app:cbn_bg="@color/accentColor"
         android:id="@+id/curveBotNav"
         android:paddingBottom="6dp"
-        app:cbn_textSize ="14dp"
-        app:cbn_textColor="@color/black"
+        app:cbn_textSize ="13dp"
+        app:cbn_textColor="@color/white"
+        app:cbn_selectedColor="@color/black"
+        app:cbn_unSelectedColor="@color/white"
+        app:cbn_showDot="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

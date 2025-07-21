@@ -2,7 +2,11 @@
 <resources>
 
     <style name="Theme.Konkura" parent="Theme.Material3.DayNight.NoActionBar">
+
         <item name="fontFamily">@font/peyda</item>
+
+        <item name="android:statusBarColor">@color/bgColorWhite</item>
+        <item name="android:windowLightStatusBar">true</item>
 
     </style>
 
@@ -25,6 +29,7 @@
 
     <style name="Theme.MyApp.BottomNav" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
+
     </style>
 
 

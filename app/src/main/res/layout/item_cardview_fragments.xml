@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_margin="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        app:strokeColor="@color/borderColor"
+        app:strokeWidth="1dp"
+        android:backgroundTint="@color/cardColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="4dp"
+        android:layout_margin="4dp"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/mainText"
+            android:textStyle="bold"
+            android:layout_marginEnd="22dp"
+            android:layout_gravity="end|center"
+            android:text="سال تحصیلی 1403 - 1404"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="start|center"
+            android:text="+"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
