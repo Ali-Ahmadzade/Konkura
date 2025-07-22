@@ -1,5 +1,6 @@
 package ir.devalix.konkura.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,11 @@ import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import ir.devalix.konkura.adapter.KonkurListRiazi
 import ir.devalix.konkura.adapter.KonkurListRiaziAdapter
+import ir.devalix.konkura.adapter.KonkurListTajrobi
 import ir.devalix.konkura.adapter.SubButtonRiazi
 import ir.devalix.konkura.databinding.RiaziFragmentBinding
 
@@ -126,7 +130,12 @@ class RiaziFragment :Fragment() {
             )
         )
 
-        val myAdapter = KonkurListRiaziAdapter( sampleData )
+        val jsonString = loadJSONFromAsset(requireContext(), "konkur_list_riazi.json")
+        val konkurListType = object : TypeToken<List<KonkurListRiazi>>() {}.type
+        val konkurList = Gson().fromJson<List<KonkurListRiazi>>(jsonString, konkurListType)
+        val arrayKonkur = ArrayList(konkurList)
+
+        val myAdapter = KonkurListRiaziAdapter( arrayKonkur )
         binding.recyclerRiazi.adapter = myAdapter
         binding.recyclerRiazi.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -150,5 +159,11 @@ class RiaziFragment :Fragment() {
             })
 
 
+
+
+    }
+
+    private fun loadJSONFromAsset(context: Context, filename: String): String {
+        return context.assets.open(filename).bufferedReader().use { it.readText() }
     }
 }

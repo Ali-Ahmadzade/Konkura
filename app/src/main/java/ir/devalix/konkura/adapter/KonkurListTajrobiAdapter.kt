@@ -1,5 +1,6 @@
 package ir.devalix.konkura.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -27,6 +28,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
             container?.removeAllViews()
 
             item.subButtons.forEach { sub ->
+                Log.v("testV" , sub.toString() )
                 val btn = MaterialButton(binding.root.context).apply {
                     text = sub.text
                     setTextColor(ContextCompat.getColor(context, android.R.color.white))
@@ -36,7 +38,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        setMargins(16, 8, 16, 0)
+                        setMargins(16, 8, 16, 8)
                     }
 
                     setOnClickListener {

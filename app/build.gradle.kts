@@ -55,4 +55,6 @@ dependencies {
     implementation("np.com.susanthapa:curved_bottom_navigation:0.7.0")
     // expandable CardView
     implementation("com.github.cachapa:ExpandableLayout:2.9.2")
+    //Gson
+    implementation("com.google.code.gson:gson:2.13.1")
 }

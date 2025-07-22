@@ -1,5 +1,6 @@
 package ir.devalix.konkura.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import ir.devalix.konkura.adapter.KonkurListTajrobiAdapter
 import ir.devalix.konkura.adapter.SubButtonTajrobi
 import ir.devalix.konkura.databinding.TajrobiFragmentBinding
 import androidx.core.view.size
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class TajrobiFragment : Fragment() {
@@ -31,38 +34,12 @@ class TajrobiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val sampleData = arrayListOf(
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1404"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1404")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1402 - 1403",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1401 - 1402",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1400 - 1401",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            )
-        )
+        val jsonString = loadJSONFromAsset(requireContext(), "konkur_list_tajrobi.json")
+        val konkurListType = object : TypeToken<List<KonkurListTajrobi>>() {}.type
+        val konkurList = Gson().fromJson<List<KonkurListTajrobi>>(jsonString, konkurListType)
+        val arrayKonkur = ArrayList(konkurList)
 
-        val myAdapter = KonkurListTajrobiAdapter( sampleData )
+        val myAdapter = KonkurListTajrobiAdapter(arrayKonkur)
         binding.recyclerTajrobi.adapter = myAdapter
         binding.recyclerTajrobi.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -85,5 +62,9 @@ class TajrobiFragment : Fragment() {
                 }
             })
 
+    }
+
+    private fun loadJSONFromAsset(context: Context, filename: String): String {
+        return context.assets.open(filename).bufferedReader().use { it.readText() }
     }
 }

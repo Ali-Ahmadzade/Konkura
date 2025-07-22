@@ -34,7 +34,7 @@ class KonkurListEnsaniAdapter(private val data: ArrayList<KonkurListEnsani>) :
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        setMargins(16, 8, 16, 0)
+                        setMargins(16, 8, 16, 8)
                     }
 
                     setOnClickListener {

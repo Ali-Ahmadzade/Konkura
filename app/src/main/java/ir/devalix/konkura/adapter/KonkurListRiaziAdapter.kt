@@ -35,7 +35,7 @@ class KonkurListRiaziAdapter(private val data: ArrayList<KonkurListRiazi>) :
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        setMargins(16, 8, 16, 0)
+                        setMargins(16, 8, 16, 8)
                     }
 
                     setOnClickListener {
@@ -46,8 +46,6 @@ class KonkurListRiaziAdapter(private val data: ArrayList<KonkurListRiazi>) :
             }
 
 
-            // باز یا بسته کردن بسته به isExpanded
-            // در bindData:
             if (item.isExpanded) {
                 binding.expandableMain.expand()
 
@@ -56,7 +54,7 @@ class KonkurListRiaziAdapter(private val data: ArrayList<KonkurListRiazi>) :
 
             }
 
-// در listener:
+
             binding.cardHeaderMain.setOnClickListener {
 
                 val targetRotation = if (!item.isExpanded) 180f else 0f
