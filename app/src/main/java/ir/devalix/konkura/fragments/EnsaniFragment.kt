@@ -5,6 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ir.devalix.konkura.adapter.KonkurListEnsani
+import ir.devalix.konkura.adapter.KonkurListEnsaniAdapter
+import ir.devalix.konkura.adapter.KonkurListTajrobiAdapter
+import ir.devalix.konkura.adapter.SubButtonEnsani
 import ir.devalix.konkura.databinding.EnsaniFragmentBinding
 
 class EnsaniFragment:Fragment() {
@@ -17,4 +23,116 @@ class EnsaniFragment:Fragment() {
         binding = EnsaniFragmentBinding.inflate(layoutInflater , container , false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sampleData = arrayListOf(
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1403 - 1404",
+                subButtons = listOf(
+                    SubButtonEnsani("math_1403", "کنکور داخل 1403"),
+                    SubButtonEnsani("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListEnsani(
+                year = "سال تحصیلی 1402 - 1403",
+                subButtons = listOf(
+                    SubButtonEnsani("chem_1402", "کنکور خارج 1403"),
+                    SubButtonEnsani("bio_1402", "کنکور داخل 1403")
+                )
+            )
+        )
+
+        val myAdapter = KonkurListEnsaniAdapter(sampleData)
+        binding.recyclerEnsani.adapter = myAdapter
+        binding.recyclerEnsani.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
+    }
+
 }

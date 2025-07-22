@@ -1,5 +1,6 @@
 package ir.devalix.konkura
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -81,10 +82,6 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.add(R.id.frameFragmentMain, TajrobiFragment())
         fragmentManager.commit()
-
-        val setupFragment = supportFragmentManager.beginTransaction()
-        setupFragment.add(R.id.frameFragmentMain, TajrobiFragment())
-        setupFragment.commit()
 
         val splashScreen = installSplashScreen()
 
