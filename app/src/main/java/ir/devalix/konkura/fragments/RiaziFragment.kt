@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -128,6 +130,24 @@ class RiaziFragment :Fragment() {
         binding.recyclerRiazi.adapter = myAdapter
         binding.recyclerRiazi.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
+        binding.recyclerRiazi.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    binding.recyclerRiazi.viewTreeObserver.removeOnPreDrawListener(this)
+
+                    for (i in 0..<binding.recyclerRiazi.size) {
+                        val v: View = binding.recyclerRiazi.getChildAt(i)
+                        v.alpha = 0.0f
+                        v.animate().alpha(1.0f)
+                            .setDuration(350)
+                            .setStartDelay((i * 50).toLong())
+                            .start()
+                    }
+
+                    return true
+                }
+            })
 
 
     }

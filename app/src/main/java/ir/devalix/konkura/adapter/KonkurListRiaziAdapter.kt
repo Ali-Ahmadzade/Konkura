@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.animation.AnimationUtils
 import com.google.android.material.button.MaterialButton
 import ir.devalix.konkura.R
 import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
@@ -73,6 +74,7 @@ class KonkurListRiaziAdapter(private val data: ArrayList<KonkurListRiazi>) :
     }
 
     override fun onBindViewHolder(holder: KonkurViewHolder, position: Int) {
+        holder.binding.cardHeaderMain.startAnimation( android.view.animation.AnimationUtils.loadAnimation( holder.itemView.context , R.anim.recycler_anim ) )
         holder.bindData(data[position], position)
     }
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -132,6 +134,24 @@ class EnsaniFragment:Fragment() {
         binding.recyclerEnsani.adapter = myAdapter
         binding.recyclerEnsani.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
+        binding.recyclerEnsani.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    binding.recyclerEnsani.viewTreeObserver.removeOnPreDrawListener(this)
+
+                    for (i in 0..<binding.recyclerEnsani.size) {
+                        val v: View = binding.recyclerEnsani.getChildAt(i)
+                        v.alpha = 0.0f
+                        v.animate().alpha(1.0f)
+                            .setDuration(350)
+                            .setStartDelay((i * 50).toLong())
+                            .start()
+                    }
+
+                    return true
+                }
+            })
 
     }
 

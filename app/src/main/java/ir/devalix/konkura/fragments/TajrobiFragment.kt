@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,8 @@ import ir.devalix.konkura.adapter.KonkurListTajrobi
 import ir.devalix.konkura.adapter.KonkurListTajrobiAdapter
 import ir.devalix.konkura.adapter.SubButtonTajrobi
 import ir.devalix.konkura.databinding.TajrobiFragmentBinding
+import androidx.core.view.size
+
 
 class TajrobiFragment : Fragment() {
     private lateinit var binding: TajrobiFragmentBinding
@@ -134,6 +137,23 @@ class TajrobiFragment : Fragment() {
         binding.recyclerTajrobi.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
 
+        binding.recyclerTajrobi.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    binding.recyclerTajrobi.viewTreeObserver.removeOnPreDrawListener(this)
+
+                    for (i in 0..<binding.recyclerTajrobi.size) {
+                        val v: View = binding.recyclerTajrobi.getChildAt(i)
+                        v.alpha = 0.0f
+                        v.animate().alpha(1.0f)
+                            .setDuration(350)
+                            .setStartDelay((i * 50).toLong())
+                            .start()
+                    }
+
+                    return true
+                }
+            })
 
     }
 }

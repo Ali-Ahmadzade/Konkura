@@ -73,6 +73,7 @@ class KonkurListEnsaniAdapter(private val data: ArrayList<KonkurListEnsani>) :
     }
 
     override fun onBindViewHolder(holder: KonkurViewHolder, position: Int) {
+        holder.binding.cardHeaderMain.startAnimation( android.view.animation.AnimationUtils.loadAnimation( holder.itemView.context , R.anim.recycler_anim ) )
         holder.bindData(data[position], position)
     }
 
