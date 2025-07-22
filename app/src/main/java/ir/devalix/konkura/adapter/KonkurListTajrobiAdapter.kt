@@ -18,7 +18,9 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: KonkurListTajrobi, position: Int) {
             binding.txtYearMain.text = item.year
-            binding.toggleIcon.text = if (item.isExpanded) "-" else "+"
+
+            binding.toggleIcon1.rotation = if (item.isExpanded) 180f else 0f
+
 
             val container = (binding.expandableMain.getChildAt(0) as? LinearLayout)
 
@@ -45,21 +47,23 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
             }
 
 
-            // باز یا بسته کردن بسته به isExpanded
-            // در bindData:
             if (item.isExpanded) {
                 binding.expandableMain.expand()
-                binding.toggleIcon.text = "-"
+
             } else {
                 binding.expandableMain.collapse()
-                binding.toggleIcon.text = "+"
+
             }
 
-// در listener:
+
             binding.cardHeaderMain.setOnClickListener {
+
+                val targetRotation = if (!item.isExpanded) 180f else 0f
+                binding.toggleIcon1.animate().rotation(targetRotation).setDuration(370).start()
+
                 item.isExpanded = !item.isExpanded
                 binding.expandableMain.toggle()
-                binding.toggleIcon.text = if (item.isExpanded) "-" else "+"
+
             }
 
         }

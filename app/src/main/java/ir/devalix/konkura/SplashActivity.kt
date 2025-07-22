@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(intent)
             onDestroy()
-        }, 3000)
+        }, 1)
 
         val scaleAnim = ScaleAnimation(
             0f, 1f,

@@ -35,99 +35,29 @@ class TajrobiFragment : Fragment() {
             KonkurListTajrobi(
                 year = "سال تحصیلی 1403 - 1404",
                 subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
-                )
-            ),
-            KonkurListTajrobi(
-                year = "سال تحصیلی 1403 - 1404",
-                subButtons = listOf(
-                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
-                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
+                    SubButtonTajrobi("math_1403", "کنکور داخل 1404"),
+                    SubButtonTajrobi("phys_1403", "کنکور خارج 1404")
                 )
             ),
             KonkurListTajrobi(
                 year = "سال تحصیلی 1402 - 1403",
                 subButtons = listOf(
-                    SubButtonTajrobi("chem_1402", "کنکور خارج 1403"),
-                    SubButtonTajrobi("bio_1402", "کنکور داخل 1403")
+                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
+                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListTajrobi(
+                year = "سال تحصیلی 1401 - 1402",
+                subButtons = listOf(
+                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
+                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
+                )
+            ),
+            KonkurListTajrobi(
+                year = "سال تحصیلی 1400 - 1401",
+                subButtons = listOf(
+                    SubButtonTajrobi("math_1403", "کنکور داخل 1403"),
+                    SubButtonTajrobi("phys_1403", "کنکور خارج 1403")
                 )
             )
         )
