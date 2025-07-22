@@ -36,17 +36,10 @@ class TajrobiFragment :Fragment() {
 
         val konkurList = arrayListOf<KonkurList>(
 
-            KonkurList("سال تحصیلی 1402 - 1404") ,
-            KonkurList("سال تحصیلی 1401 - 1402") ,
-            KonkurList("سال تحصیلی 1400 - 1401") ,
-            KonkurList("سال تحصیلی 1399 - 1400") ,
-            KonkurList("سال تحصیلی 1398 - 1399") ,
-            KonkurList("سال تحصیلی 1397 - 1398") ,
-            KonkurList("سال تحصیلی 1396 - 1397") ,
-            KonkurList("سال تحصیلی 1395 - 1396") ,
-            KonkurList("سال تحصیلی 1394 - 1395") ,
-            KonkurList("سال تحصیلی 1393 - 1394") ,
-            KonkurList("سال تحصیلی 1392 - 1393")
+            KonkurList( "سال تحصیلی 1403 - 1404" , false ) ,
+            KonkurList( "سال تحصیلی 1402 - 1403" , false ) ,
+            KonkurList( "سال تحصیلی 1401 - 1402" , false ) ,
+            KonkurList( "سال تحصیلی 1400 - 1401" , false )
         )
 
         val myAdapter = KonkurListAdapter( konkurList )

@@ -6,42 +6,34 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ir.devalix.konkura.R
+import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class KonkurListAdapter( private val data :ArrayList<KonkurList> ) : RecyclerView.Adapter<KonkurListAdapter.KonkurViewHolder>() {
+class KonkurListAdapter(private val data: ArrayList<KonkurList>) : RecyclerView.Adapter<KonkurListAdapter.KonkurViewHolder>() {
 
-
-    inner class KonkurViewHolder( itemView :View ) :RecyclerView.ViewHolder( itemView ){
-        var txtTest = itemView.findViewById<TextView>( R.id.txtYearMain )
+    inner class KonkurViewHolder(val binding: ItemCardviewFragmentsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(position: Int) {
-            txtTest.text = data[position].year
+            val item = data[position]
+
+            binding.txtYearMain.text = item.year
+            binding.toggleIcon.text = if (item.isExpanded) "-" else "+"
+
+            binding.cardHeaderMain.setOnClickListener {
+                item.isExpanded = !item.isExpanded
+                notifyItemChanged(position)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KonkurViewHolder {
-        val view = LayoutInflater.from( parent.context ).inflate( R.layout.item_cardview_fragments , parent , false)
-        return KonkurViewHolder( view )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemCardviewFragmentsBinding.inflate(inflater, parent, false)
+        return KonkurViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: KonkurViewHolder, position: Int) {
         holder.bindData(position)
-
-        val expandable = holder.itemView.findViewById<ExpandableLayout>(R.id.expandableMain)
-        val toggleIcon = holder.itemView.findViewById<TextView>(R.id.toggleIcon)
-
-        toggleIcon.setOnClickListener {
-            expandable.toggle()
-            toggleIcon.text = if (expandable.isExpanded) "-" else "+"
-        }
-
-        // جلوگیری از بهم ریختن وضعیت expand در بازیابی ویو‌ها:
-        expandable.setExpanded(expandable.isExpanded, false)
     }
-
-
-
 }
