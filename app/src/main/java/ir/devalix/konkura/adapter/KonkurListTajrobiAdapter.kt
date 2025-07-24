@@ -1,6 +1,9 @@
 package ir.devalix.konkura.adapter
 
+import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,7 +16,16 @@ import com.google.android.material.button.MaterialButton
 import ir.devalix.konkura.PdfActivity
 import ir.devalix.konkura.R
 import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okio.buffer
+import okio.sink
+import org.json.JSONObject
 import java.io.File
+import java.io.IOException
 
 class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
     RecyclerView.Adapter<KonkurListTajrobiAdapter.KonkurViewHolder>() {
@@ -31,7 +43,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
             container?.removeAllViews()
 
             item.subButtons.forEach { sub ->
-                Log.v("testV" , sub.toString() )
+                Log.v("testV", sub.toString())
                 val btn = MaterialButton(binding.root.context).apply {
                     text = sub.text
                     setTextColor(ContextCompat.getColor(context, android.R.color.white))
@@ -45,12 +57,8 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
                     }
 
                     setOnClickListener {
-                        Toast.makeText(context, "Clicked: ${sub.id}", Toast.LENGTH_SHORT).show()
                         val uniqueID = sub.id
-                        val intent = Intent( context , PdfActivity::class.java )
-                        intent.putExtra( "UNIQUE_ID" , uniqueID )
-                        context.startActivity(intent)
-                        saveSelectedKonkur( uniqueID )
+                        openSelectedPdf(uniqueID, context)
                     }
                 }
                 container?.addView(btn)
@@ -79,6 +87,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
         }
 
     }
+    override fun getItemCount(): Int = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KonkurViewHolder {
         val binding =
@@ -87,17 +96,72 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
     }
 
     override fun onBindViewHolder(holder: KonkurViewHolder, position: Int) {
-        holder.binding.cardHeaderMain.startAnimation( android.view.animation.AnimationUtils.loadAnimation( holder.itemView.context , R.anim.recycler_anim ) )
+        holder.binding.cardHeaderMain.startAnimation(
+            android.view.animation.AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.recycler_anim
+            )
+        )
         holder.bindData(data[position], position)
 
     }
 
-    override fun getItemCount(): Int = data.size
-
-    private fun saveSelectedKonkur(uniqueID :String){
+    private fun openSelectedPdf(uniqueID: String, context: Context) {
         val fileName = "$uniqueID.pdf"
+        val file = File(context.filesDir, fileName)
+        if (file.exists()) {
+            val intent = Intent(context, PdfActivity::class.java)
+            intent.putExtra("UNIQUE_ID", uniqueID)
+            context.startActivity(intent)
+        } else {
+            downloadAndSavePdf(context, uniqueID)
+        }
 
     }
 
+    private fun downloadAndSavePdf(context: Context, uniqueID: String) {
+
+        val url = generateLink(uniqueID, context)
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "دانلود ناموفق بود", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (!response.isSuccessful) {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "دانلود شکست خورد", Toast.LENGTH_SHORT).show()
+                    }
+                    return
+                }
+
+                val file = File(context.filesDir, "$uniqueID.pdf")
+                val sink = file.sink().buffer()
+                sink.writeAll(response.body!!.source())
+                sink.close()
+
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "دانلود با موفقیت انجام شد", Toast.LENGTH_SHORT).show()
+                    openSelectedPdf(uniqueID, context)
+                }
+            }
+        })
+    }
+
+    private fun generateLink(id: String, context: Context): String {
+
+        val jsonString =
+            context.assets.open("konkur_links.json").bufferedReader().use { it.readText() }
+        val map = JSONObject(jsonString)
+        return map.get(id).toString()
+    }
 }
 

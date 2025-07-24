@@ -59,4 +59,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.13.1")
     //pdf viewer
     implementation("com.github.afreakyelf:Pdf-Viewer:v1.0.7")
+    // okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

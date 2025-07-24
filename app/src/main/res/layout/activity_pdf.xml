@@ -7,16 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".PdfActivity">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_centerInParent="true"
-        style="?android:attr/progressBarStyleLarge"
-        android:visibility="visible"/>
 
     <com.rajat.pdfviewer.PdfRendererView
         android:visibility="gone"
+
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
