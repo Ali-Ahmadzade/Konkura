@@ -1,5 +1,6 @@
 package ir.devalix.konkura.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import ir.devalix.konkura.PdfActivity
 import ir.devalix.konkura.R
 import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
+import java.io.File
 
 class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
     RecyclerView.Adapter<KonkurListTajrobiAdapter.KonkurViewHolder>() {
@@ -43,6 +46,11 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
 
                     setOnClickListener {
                         Toast.makeText(context, "Clicked: ${sub.id}", Toast.LENGTH_SHORT).show()
+                        val uniqueID = sub.id
+                        val intent = Intent( context , PdfActivity::class.java )
+                        intent.putExtra( "UNIQUE_ID" , uniqueID )
+                        context.startActivity(intent)
+                        saveSelectedKonkur( uniqueID )
                     }
                 }
                 container?.addView(btn)
@@ -81,8 +89,15 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
     override fun onBindViewHolder(holder: KonkurViewHolder, position: Int) {
         holder.binding.cardHeaderMain.startAnimation( android.view.animation.AnimationUtils.loadAnimation( holder.itemView.context , R.anim.recycler_anim ) )
         holder.bindData(data[position], position)
+
     }
 
     override fun getItemCount(): Int = data.size
+
+    private fun saveSelectedKonkur(uniqueID :String){
+        val fileName = "$uniqueID.pdf"
+
+    }
+
 }
 
