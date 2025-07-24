@@ -9,6 +9,7 @@
     android:background="@color/bgColorWhite"
     tools:context=".MainActivity">
 
+
     <FrameLayout
         android:id="@+id/frameFragmentMain"
         android:layout_width="match_parent"

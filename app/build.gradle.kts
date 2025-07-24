@@ -57,4 +57,6 @@ dependencies {
     implementation("com.github.cachapa:ExpandableLayout:2.9.2")
     //Gson
     implementation("com.google.code.gson:gson:2.13.1")
+    //pdf viewer
+    implementation("com.github.afreakyelf:Pdf-Viewer:v1.0.7")
 }

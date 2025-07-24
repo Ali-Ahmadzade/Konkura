@@ -33,11 +33,14 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
 
-        val intent = Intent(this, MainActivity::class.java)
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(intent)
-            onDestroy()
-        }, 1)
+        val intent = Intent(this , PdfActivity::class.java)
+        startActivity(intent)
+
+//        val intent = Intent(this, MainActivity::class.java)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            startActivity(intent)
+//            onDestroy()
+//        }, 1)
 
         val scaleAnim = ScaleAnimation(
             0f, 1f,
