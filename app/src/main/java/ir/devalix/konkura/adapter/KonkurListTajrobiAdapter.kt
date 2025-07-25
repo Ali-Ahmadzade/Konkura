@@ -2,8 +2,6 @@ package ir.devalix.konkura.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.cazaea.sweetalert.SweetAlertDialog
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
@@ -36,16 +33,13 @@ class KonkurListTajrobiAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: KonkurListTajrobi, position: Int) {
             binding.txtYearMain.text = item.year
-
             binding.toggleIcon1.rotation = if (item.isExpanded) 180f else 0f
-
 
             val container = (binding.expandableMain.getChildAt(0) as? LinearLayout)
 
             container?.removeAllViews()
 
             item.subButtons.forEach { sub ->
-                Log.v("testV", sub.toString())
                 val btn = MaterialButton(binding.root.context).apply {
                     text = sub.text
                     setTextColor(ContextCompat.getColor(context, android.R.color.white))
@@ -61,7 +55,6 @@ class KonkurListTajrobiAdapter(
                     setOnClickListener {
                         val uniqueID = sub.id
                         openSelectedPdf(uniqueID, context)
-
                     }
                 }
                 container?.addView(btn)
@@ -107,7 +100,6 @@ class KonkurListTajrobiAdapter(
             )
         )
         holder.bindData(data[position], position)
-
     }
 
     private fun openSelectedPdf(uniqueID: String, context: Context) {
@@ -140,11 +132,11 @@ class KonkurListTajrobiAdapter(
             }
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
-                    Toast.makeText(context, "completed", Toast.LENGTH_SHORT).show()
+                    Log.v("downloadCompleted" , "")
                 }
 
                 override fun onError(p0: Error?) {
-                    Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "اینترنت خود را بررسی کنید و مجدد تلاش کنید", Toast.LENGTH_SHORT).show()
                 }
 
             })
@@ -162,5 +154,6 @@ class KonkurListTajrobiAdapter(
         val map = JSONObject(jsonString)
         return map.get(id).toString()
     }
+
 }
 

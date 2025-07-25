@@ -16,16 +16,13 @@ import ir.devalix.konkura.adapter.KonkurListTajrobi
 import ir.devalix.konkura.adapter.KonkurListTajrobiAdapter
 import ir.devalix.konkura.databinding.TajrobiFragmentBinding
 import androidx.core.view.size
-import com.cazaea.sweetalert.SweetAlertDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ir.devalix.konkura.PdfActivity
-import kotlinx.coroutines.delay
 
 
 class TajrobiFragment : Fragment(), KonkurListTajrobiAdapter.OnDownloadProgressListener {
     private lateinit var binding: TajrobiFragmentBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

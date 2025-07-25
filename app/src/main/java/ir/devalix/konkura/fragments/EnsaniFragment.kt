@@ -1,7 +1,10 @@
 package ir.devalix.konkura.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import ir.devalix.konkura.PdfActivity
 import ir.devalix.konkura.adapter.KonkurListEnsani
 import ir.devalix.konkura.adapter.KonkurListEnsaniAdapter
 import ir.devalix.konkura.adapter.KonkurListRiazi
@@ -19,7 +23,7 @@ import ir.devalix.konkura.adapter.KonkurListTajrobiAdapter
 import ir.devalix.konkura.adapter.SubButtonEnsani
 import ir.devalix.konkura.databinding.EnsaniFragmentBinding
 
-class EnsaniFragment:Fragment() {
+class EnsaniFragment:Fragment() , KonkurListEnsaniAdapter.OnDownloadProgressListener{
     lateinit var binding: EnsaniFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +44,7 @@ class EnsaniFragment:Fragment() {
         val konkurList = Gson().fromJson<List<KonkurListEnsani>>(jsonString, konkurListType)
         val arrayKonkur = ArrayList(konkurList)
 
-        val myAdapter = KonkurListEnsaniAdapter(arrayKonkur)
+        val myAdapter = KonkurListEnsaniAdapter(arrayKonkur , this)
         binding.recyclerEnsani.adapter = myAdapter
         binding.recyclerEnsani.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -67,6 +71,37 @@ class EnsaniFragment:Fragment() {
 
     private fun loadJSONFromAsset(context: Context, filename: String): String {
         return context.assets.open(filename).bufferedReader().use { it.readText() }
+    }
+
+    override fun onProgress(percent: Int, uniqueID: String) {
+
+        if (percent < 100) {
+            uiAppear()
+            binding.progressBar.progress = percent.toFloat()
+            binding.txtProgress.text = "$percent%"
+        } else if (percent == 100) {
+            binding.progressBar.progress = percent.toFloat()
+            binding.txtProgress.text = "$percent%"
+            Handler(Looper.getMainLooper()).postDelayed({
+                uiDisappear()
+            }, 300)
+            val intent = Intent(context, PdfActivity::class.java)
+            intent.putExtra("UNIQUE_ID", uniqueID)
+            context?.startActivity(intent)
+
+        }
+
+
+    }
+
+    private fun uiAppear() {
+        binding.alertBgColor.visibility = View.VISIBLE
+        binding.alertBg.visibility = View.VISIBLE
+    }
+
+    private fun uiDisappear() {
+        binding.alertBgColor.visibility = View.GONE
+        binding.alertBg.visibility = View.GONE
     }
 
 }
