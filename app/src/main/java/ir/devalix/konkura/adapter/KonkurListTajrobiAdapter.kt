@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.cazaea.sweetalert.SweetAlertDialog
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
@@ -22,12 +23,16 @@ import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
 import org.json.JSONObject
 import java.io.File
 
-class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi> , private val listener: OnDownloadProgressListener) :
+class KonkurListTajrobiAdapter(
+    private val data: ArrayList<KonkurListTajrobi>,
+    private val listener: OnDownloadProgressListener
+) :
     RecyclerView.Adapter<KonkurListTajrobiAdapter.KonkurViewHolder>() {
 
-
+    var progressPercent = 0
 
     inner class KonkurViewHolder(val binding: ItemCardviewFragmentsBinding) :
+
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: KonkurListTajrobi, position: Int) {
             binding.txtYearMain.text = item.year
@@ -85,6 +90,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi> , 
         }
 
     }
+
     override fun getItemCount(): Int = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KonkurViewHolder {
@@ -124,13 +130,15 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi> , 
         val fileName = "$uniqueID.pdf"
         val path = context.filesDir.absolutePath
 
-        PRDownloader.download( url , path , fileName )
+        PRDownloader.download(url, path, fileName)
             .build()
             .setOnProgressListener { progress ->
-                val percent = (progress.currentBytes * 100 / progress.totalBytes).toInt()
-                listener.onProgress(percent)
+
+                progressPercent = (progress.currentBytes * 100 / progress.totalBytes).toInt()
+                listener.onProgress(progressPercent, uniqueID)
+
             }
-            .start( object :OnDownloadListener{
+            .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
                     Toast.makeText(context, "completed", Toast.LENGTH_SHORT).show()
                 }
@@ -144,7 +152,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi> , 
     }
 
     interface OnDownloadProgressListener {
-        fun onProgress(percent: Int)
+        fun onProgress(percent: Int, uniqueID: String)
     }
 
     private fun generateLink(id: String, context: Context): String {

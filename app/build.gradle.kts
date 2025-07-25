@@ -18,7 +18,7 @@ android {
     }
 
     buildTypes {
-        buildFeatures{
+        buildFeatures {
             viewBinding = true
         }
         release {
@@ -65,5 +65,7 @@ dependencies {
     implementation("com.github.amitshekhariitbhu:PRDownloader:1.0.2")
     //progressBar
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
+    //sweetAlertDialog
+    implementation("com.github.cazaea:sweet-alert-dialog:1.0.0")
 
 }

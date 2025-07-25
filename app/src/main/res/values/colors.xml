@@ -11,12 +11,14 @@
     <color name="grey">#4FFF0000</color>
 
     <color name="bgColorWhite">#F8FAFC</color>
-    <color name="progressColor">#A63B82F6</color>
     <color name="primaryColor">#3B82F6</color>
     <color name="accentColor">#2563EB</color>
     <color name="cardColor">#FFFFFF</color>
     <color name="mainText">#1E293B</color>
     <color name="otherText">#64748B</color>
     <color name="borderColor">#C3C8D1</color>
+
+    <color name="progressColor">#A63B82F6</color>
+    <color name="alertBG">#48000000</color>
 
 </resources>
