@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.graphics.alpha
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-class TajrobiFragment : Fragment() {
+class TajrobiFragment : Fragment() , KonkurListTajrobiAdapter.OnDownloadProgressListener {
     private lateinit var binding: TajrobiFragmentBinding
 
     override fun onCreateView(
@@ -39,7 +40,7 @@ class TajrobiFragment : Fragment() {
         val konkurList = Gson().fromJson<List<KonkurListTajrobi>>(jsonString, konkurListType)
         val arrayKonkur = ArrayList(konkurList)
 
-        val myAdapter = KonkurListTajrobiAdapter(arrayKonkur)
+        val myAdapter = KonkurListTajrobiAdapter(arrayKonkur , this)
         binding.recyclerTajrobi.adapter = myAdapter
         binding.recyclerTajrobi.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -67,4 +68,13 @@ class TajrobiFragment : Fragment() {
     private fun loadJSONFromAsset(context: Context, filename: String): String {
         return context.assets.open(filename).bufferedReader().use { it.readText() }
     }
+
+    override fun onProgress(percent: Int) {
+
+
+
+    }
+
+
+
 }

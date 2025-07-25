@@ -12,23 +12,20 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.downloader.Error
+import com.downloader.OnDownloadListener
+import com.downloader.PRDownloader
 import com.google.android.material.button.MaterialButton
 import ir.devalix.konkura.PdfActivity
 import ir.devalix.konkura.R
 import ir.devalix.konkura.databinding.ItemCardviewFragmentsBinding
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okio.buffer
-import okio.sink
 import org.json.JSONObject
 import java.io.File
-import java.io.IOException
 
-class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
+class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi> , private val listener: OnDownloadProgressListener) :
     RecyclerView.Adapter<KonkurListTajrobiAdapter.KonkurViewHolder>() {
+
+
 
     inner class KonkurViewHolder(val binding: ItemCardviewFragmentsBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -59,6 +56,7 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
                     setOnClickListener {
                         val uniqueID = sub.id
                         openSelectedPdf(uniqueID, context)
+
                     }
                 }
                 container?.addView(btn)
@@ -121,39 +119,32 @@ class KonkurListTajrobiAdapter(private val data: ArrayList<KonkurListTajrobi>) :
 
     private fun downloadAndSavePdf(context: Context, uniqueID: String) {
 
+
         val url = generateLink(uniqueID, context)
-        val client = OkHttpClient()
+        val fileName = "$uniqueID.pdf"
+        val path = context.filesDir.absolutePath
 
-        val request = Request.Builder()
-            .url(url)
+        PRDownloader.download( url , path , fileName )
             .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(context, "دانلود ناموفق بود", Toast.LENGTH_SHORT).show()
-                }
+            .setOnProgressListener { progress ->
+                val percent = (progress.currentBytes * 100 / progress.totalBytes).toInt()
+                listener.onProgress(percent)
             }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful) {
-                    Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, "دانلود شکست خورد", Toast.LENGTH_SHORT).show()
-                    }
-                    return
+            .start( object :OnDownloadListener{
+                override fun onDownloadComplete() {
+                    Toast.makeText(context, "completed", Toast.LENGTH_SHORT).show()
                 }
 
-                val file = File(context.filesDir, "$uniqueID.pdf")
-                val sink = file.sink().buffer()
-                sink.writeAll(response.body!!.source())
-                sink.close()
-
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(context, "دانلود با موفقیت انجام شد", Toast.LENGTH_SHORT).show()
-                    openSelectedPdf(uniqueID, context)
+                override fun onError(p0: Error?) {
+                    Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show()
                 }
-            }
-        })
+
+            })
+
+    }
+
+    interface OnDownloadProgressListener {
+        fun onProgress(percent: Int)
     }
 
     private fun generateLink(id: String, context: Context): String {
