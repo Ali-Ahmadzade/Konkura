@@ -22,7 +22,8 @@ android {
             viewBinding = true
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -59,13 +60,9 @@ dependencies {
     implementation("com.google.code.gson:gson:2.13.1")
     //pdf viewer
     implementation("com.github.afreakyelf:Pdf-Viewer:v1.0.7")
-    // okhttp
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     //download
     implementation("com.github.amitshekhariitbhu:PRDownloader:1.0.2")
     //progressBar
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
-    //sweetAlertDialog
-    implementation("com.github.cazaea:sweet-alert-dialog:1.0.0")
 
 }

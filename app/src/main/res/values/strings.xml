@@ -1,4 +1,5 @@
 <resources>
+    <string name="version"> نسخه ۱.۰ </string>
     <string name="app_name">Konkura</string>
     <string name="app_name_fa">کنکورا</string>
     <string name="splash_text">کنکورا : بانک جامع سوالات کنکور</string>

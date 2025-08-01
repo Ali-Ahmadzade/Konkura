@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+########      Gson
+
+# Keep generic signatures; needed for correct type resolution
+-keepattributes Signature
+
+# Keep class TypeToken (respectively its generic signature)
+-keep class com.google.gson.reflect.TypeToken { *; }
+
+# Keep any (anonymous) classes extending TypeToken
+-keep class * extends com.google.gson.reflect.TypeToken

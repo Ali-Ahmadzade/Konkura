@@ -2,6 +2,7 @@ package ir.devalix.konkura
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import ir.devalix.konkura.fragments.TajrobiFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
+import java.net.NetworkInterface
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
     }
 
     private fun setupSplashScreen() {
@@ -98,6 +99,25 @@ class MainActivity : AppCompatActivity() {
                 }.start()
         }
     }
+
+    private fun isVpnActive(): Boolean {
+        try {
+            val interfaces = NetworkInterface.getNetworkInterfaces()
+            for (networkInterface in interfaces) {
+                if (!networkInterface.isUp || networkInterface.interfaceAddresses.isEmpty()) continue
+
+                if (networkInterface.name.equals("tun0", ignoreCase = true) ||
+                    networkInterface.name.equals("ppp0", ignoreCase = true)
+                ) {
+                    return true
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
 
 
 }

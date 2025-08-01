@@ -26,7 +26,7 @@ class KonkurListTajrobiAdapter(
 ) :
     RecyclerView.Adapter<KonkurListTajrobiAdapter.KonkurViewHolder>() {
 
-    var progressPercent = 0
+    private var progressPercent = 0
 
     inner class KonkurViewHolder(val binding: ItemCardviewFragmentsBinding) :
 
@@ -54,7 +54,7 @@ class KonkurListTajrobiAdapter(
 
                     setOnClickListener {
                         val uniqueID = sub.id
-                        openSelectedPdf(uniqueID, context)
+                        openSelectedPdf(uniqueID, sub.text, context)
                     }
                 }
                 container?.addView(btn)
@@ -102,12 +102,13 @@ class KonkurListTajrobiAdapter(
         holder.bindData(data[position], position)
     }
 
-    private fun openSelectedPdf(uniqueID: String, context: Context) {
+    private fun openSelectedPdf(uniqueID: String, konkurName: String, context: Context) {
         val fileName = "$uniqueID.pdf"
         val file = File(context.filesDir, fileName)
         if (file.exists()) {
             val intent = Intent(context, PdfActivity::class.java)
             intent.putExtra("UNIQUE_ID", uniqueID)
+            intent.putExtra("konkurName", konkurName)
             context.startActivity(intent)
         } else {
             downloadAndSavePdf(context, uniqueID)
@@ -132,15 +133,19 @@ class KonkurListTajrobiAdapter(
             }
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
-                    Log.v("downloadCompleted" , "")
+                    Log.v("downloadCompleted", "")
                 }
 
                 override fun onError(p0: Error?) {
-                    Toast.makeText(context, "اینترنت خود را بررسی کنید و مجدد تلاش کنید", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "اینترنت خود را بررسی کنید و مجدد تلاش کنید",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    PRDownloader.cancelAll()
                 }
 
             })
-
     }
 
     interface OnDownloadProgressListener {
